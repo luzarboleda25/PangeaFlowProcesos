@@ -1,5 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
 <?php
+session_start();
  // try {
   include("../lib/funciones.php");
   require_once('../lib/nusoap.php'); 
@@ -13,12 +14,13 @@ if (isset($_POST["Biniciar"])) {
 				$sesionUsuario=array('sesionActual' =>$sesion);
 				$resultadoLogueo = $client->LogIn($sesionUsuario);
 				//echo '<pre>';print_r($resultadoLogueo);	
-			   if($resultadoLogueo->return->estatus=="OK"){ 
+			   if($resultadoLogueo->return->estatus=="OK"){
 				$periodo= array('id' => '2','borrado'=>'0');		
 				$grupo= array('id' => '2','borrado'=>'0');		
 			    $proceso= array('id' => '1','borrado'=>'0','codigo'=>'0','costo'=>12.22,'duracion'=>'0','version'=>'0');	
 				$tareaInicial= array('id' => '1','borrado'=>'0','tareaInicial'=>'1','tareaInformativa'=>'0','codigo'=>'0','costo'=>12.22,'duracion'=>'0','version'=>'0');	
 				$sesionActual= array('id' => $resultadoLogueo->return->sesions->id,'borrado'=>'0');	
+				$_SESSION["sesionUsuario"]=$sesionActual;
 				$instancia=array('IdUsuario'=>$usuario,'borrado'=>'0');
 				$parametros= array('instanciaActual' => $instancia,
 							'sesionActual' => $sesionActual,
