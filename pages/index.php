@@ -32,7 +32,7 @@ if (isset($_POST["Biniciar"])){
 						'periodoActual' => $periodo,
 						'grupoActual' => $grupo,
 						'procesoActual' => $proceso,
-						'tareaInicialtareaInicial' => $tareaInicial);	
+						'tareaInicial' => $tareaInicial);	
 			$wsdl_url = 'http://localhost:15362/CapaDeServiciosAdmin/GestionDeInstancias?WSDL';
 			$client = new SOAPClient($wsdl_url);
 			$client->decode_utf8 = false; 	
