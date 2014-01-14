@@ -32,7 +32,7 @@ if (isset($_POST["Biniciar"])){
 						'periodoActual' => $periodo,
 						'grupoActual' => $grupo,
 						'procesoActual' => $proceso,
-						'tareaInicial' => $tareaInicial
+						'tareaInicial' => $tareaInicial,
 						'descripcionInstancia'=>'Descripcion_'.date("Y-m-d"),
 						'referenciaInstancia'=>'Referencia_'.date("Y-m-d"),
 						'estadoInstancia'=>'Estado_'.date("Y-m-d"));	
@@ -74,16 +74,7 @@ if (isset($_POST["Biniciar"])){
 							$resultadoFinActividad = $client->FinalizarActividad($parametros);
 							echo '<br><pre>';print_r($resultadoFinActividad);
 							
-							if($resultadoFinActividad->return->estatus == "OK"){
-								/*$wsdl_url = 'http://localhost:15362/CapaDeServiciosAdmin/GestionDeTransicion?WSDL';
-								$client = new SOAPClient($wsdl_url);
-								$client->decode_utf8 = false; 	
-								$resultadoTransicion = $client->ConsultaTransicion($tareaInicial);
-								
-								if($resultadoTransicion->return->estatus == "OK"){
-									$siguienteTarea = $resultadoTransicion->return->transicions->idTareaDestino;
-								}*/
-								
+							if($resultadoFinActividad->return->estatus == "OK"){								
 								iraURL("../pages/principal.php");
 							}
 						}	
