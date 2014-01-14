@@ -18,7 +18,7 @@ if(isset($_POST["procesar"])) {
 					'periodoActual' => $periodo,
 					'grupoActual' => $grupo,
 					'procesoActual' => $proceso,
-					'tareaInicialtareaInicial' => $tareaInicial);	
+					'tareaInicial' => $tareaInicial);	
 		$wsdl_url = 'http://localhost:15362/CapaDeServiciosAdmin/GestionDeInstancias?WSDL';
 		$client = new SOAPClient($wsdl_url);
 		$client->decode_utf8 = false; 	
@@ -38,7 +38,8 @@ if(isset($_POST["procesar"])) {
 				//echo '<br><pre>';print_r($resultadoActividad);
 				
 				if($resultadoActividad->return->estatus == "OK"){
-					$actividad = array('id' => $resultadoActividad->return->actividads->id,'borrado' => '0');	
+					$actividad = array('id' => $resultadoActividad->return->actividads->id,'borrado' => '0');
+					$_SESSION["actividad"] = $actividad;
 					$parametros = array('actividadActual' => $actividad,
 								'usuarioActual' => $_SESSION["usuario"]);
 					$resultadoAsignar = $client->AsignarActividad($parametros);
@@ -48,26 +49,8 @@ if(isset($_POST["procesar"])) {
 					$resultadoInicio = $client->IniciarActividad($parametros);
 					echo '<br><pre>';print_r($resultadoInicio);
 					
-					if($resultadoInicio->return->estatus == "OK"){
-						$condicion = array('id' => '1','borrado' => '0');	
-						$parametros = array('actividadActual' => $actividad,
-									'sesionActual' => $sesionActual,
-									'condicionActual' => $condicion);
-						$resultadoFinActividad = $client->FinalizarActividad($parametros);
-						echo '<br><pre>';print_r($resultadoFinActividad);
-						
-						if($resultadoFinActividad->return->estatus == "OK"){
-							/*$wsdl_url = 'http://localhost:15362/CapaDeServiciosAdmin/GestionDeTransicion?WSDL';
-							$client = new SOAPClient($wsdl_url);
-							$client->decode_utf8 = false; 	
-							$resultadoTransicion = $client->ConsultaTransicion($tareaInicial);
-							
-							if($resultadoTransicion->return->estatus == "OK"){
-								$siguienteTarea = $resultadoTransicion->return->transicions->idTareaDestino;
-							}*/
-							
-							iraUrl("procesandoCliente.php");
-						}
+					if($resultadoInicio->return->estatus == "OK"){							
+						iraUrl("procesandoCliente.php");
 					}	
 				}
 			}
