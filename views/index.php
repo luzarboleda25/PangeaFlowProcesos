@@ -15,7 +15,8 @@
     <link href="../css/estiloLogin.css" rel="stylesheet">
 </head>
 
-<body class="appBg">	
+<body class="appBg">
+<br>
 	  <div class="container app-container">          
 		<!--Caso pantalla uno-->
        <div class="tab-content">

@@ -51,26 +51,38 @@ if(isset($_POST["procesar"])){
 					$parametros = array('actividadActual' => $actividad,
 								'usuarioActual' => $usuarioActual);
 					$resultadoAsignar = $client->AsignarActividad($parametros);
-					echo '<br><pre>';print_r($resultadoAsignar);					
+					//echo '<br><pre>';print_r($resultadoAsignar);					
 					$parametros = array('actividadActual' => $actividad,
 								'sesionActual' => $sesionActual);						
 					$resultadoInicio = $client->IniciarActividad($parametros);
-					echo '<br><pre>';print_r($resultadoInicio);
+					//echo '<br><pre>';print_r($resultadoInicio);
 					
-					if($resultadoInicio->return->estatus == "OK"){	
+					if($resultadoInicio->return->estatus == "OK"){
+						$_SESSION["resultadoCreacion2"]=$resultadoCreacion;
+						$_SESSION["resultadoInstancia2"]=$resultadoInstancia;
+						$_SESSION["resultadoActividad2"]=$resultadoActividad;
+						$_SESSION["resultadoInicio2"]=$resultadoInicio;	
 						iraUrl("procesandoCliente.php");
-					}
-				}
-			}
+					}else{
+				        javaalert($resultadoInicio->return->estatus.": ".$resultadoInicio->return->observacion);
+		            }
+				}else{
+					javaalert($resultadoActividad->return->estatus.": ".$resultadoActividad->return->observacion);
+		        }
+			}else{
+				javaalert($resultadoInstancia->return->estatus.": ".$resultadoInstancia->return->observacion);
+		    }
+		}else{
+			javaalert($resultadoCreacion->return->estatus.": ".$resultadoCreacion->return->observacion);
 		}
 	}
 }
 include("../views/principal.php");
 
 echo '<br>Resultado del Logueo:<pre>';print_r($_SESSION["resultadoLogueo"]);
-echo '<br>Resultado del Resultado de la Creación de la instancia:<pre>';print_r($_SESSION["resultadoCreacion"]);
-echo '<br>Resultado de la Búsqueda de la instancia creada:<pre>';print_r($_SESSION["resultadoInstancia"]);
-echo '<br>Resultado de la Búsqueda de la actividad inicial:<pre>';print_r($_SESSION["resultadoActividad"]);
+echo '<br>Resultado del Resultado de la Creación de la Instancia:<pre>';print_r($_SESSION["resultadoCreacion"]);
+echo '<br>Resultado de la Búsqueda de la Instancia Creada:<pre>';print_r($_SESSION["resultadoInstancia"]);
+echo '<br>Resultado de la Búsqueda de la Actividad Inicial:<pre>';print_r($_SESSION["resultadoActividad"]);
 echo '<br>Resultado de Iniciar Actividad :<pre>';print_r($_SESSION["resultadoInicio"]);
 echo '<br>Resultado de Finalizar Actividad:<pre>';print_r($_SESSION["resultadoFinActividad"]);
 

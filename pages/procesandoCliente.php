@@ -31,25 +31,39 @@ if(isset($_POST["procesar"])){
 			$client = new SOAPClient($wsdl_url);
 			$client->decode_utf8 = false;
 			$resultadoFinActividad = $client->FinalizarActividad($parametros);
-			echo '<br><pre>';print_r($resultadoFinActividad);
+			//echo '<br><pre>';print_r($resultadoFinActividad);
 				
 			if($resultadoFinActividad->return->estatus == "OK"){
 				$wsdl_url = 'http://localhost:15362/CapaDeServiciosAdmin/GestionDeTransicion?WSDL';
 				$client = new SOAPClient($wsdl_url);
 				$client->decode_utf8 = false;
 				$resultadoTransicion=$client->consultaTransicionXTarea($idTarea);
-				echo '<br><pre>';print_r($resultadoTransicion);
+				//echo '<br><pre>';print_r($resultadoTransicion);
 				if($resultadoTransicion->return->estatus == "OK"){
 					$siguienteTarea=$resultadoTransicion->return->transicions->idTareaDestino;
-					echo '<br><pre>';print_r($siguienteTarea);
+					//echo '<br><pre>';print_r($siguienteTarea);
 					$_SESSION["siguienteTarea"] = $siguienteTarea;
+					
+					$_SESSION["resultadoTransicion"]=$resultadoTransicion;
+					$_SESSION["resultadoFinActividad2"]=$resultadoFinActividad;
 					iraUrl("procesandoFactura.php");
-				}
-			}
+				}else{
+					javaalert($resultadoTransicion->return->estatus.": ".$resultadoTransicion->return->observacion);
+		        }
+			}else{
+				javaalert($resultadoFinActividad->return->estatus.": ".$resultadoFinActividad->return->observacion);
+		    }
 		}
 	}
 }
 include("../views/procesandoCliente.php");
+
+echo '<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>';
+echo '<br>Resultado del Resultado de la Creación de la Instancia:<pre>';print_r($_SESSION["resultadoCreacion2"]);
+echo '<br>Resultado de la Búsqueda de la Instancia Creada:<pre>';print_r($_SESSION["resultadoInstancia2"]);
+echo '<br>Resultado de la Búsqueda de la Actividad Inicial:<pre>';print_r($_SESSION["resultadoActividad2"]);
+echo '<br>Resultado de Iniciar Actividad :<pre>';print_r($_SESSION["resultadoInicio2"]);
+
 /*} catch (Exception $e) {
 	javaalert('Lo sentimos no hay conexión');
 	iraURL('../views/index.php');

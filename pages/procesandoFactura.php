@@ -32,10 +32,15 @@ if($_SESSION["sesionUsuario"]!="" && $_SESSION["usuario"]!="" && $_SESSION["inst
 					
 		if($resultadoInicio->return->estatus == "OK"){
 			include("../views/procesandoFactura.php");
+			echo '<br> <br> <br> <br> <br> <br> <br> <br>';
+			echo '<br>Resultado de Finalizar Actividad:<pre>';print_r($_SESSION["resultadoFinActividad2"]);
+			echo '<br>Resultado de la Transición:<pre>';print_r($_SESSION["resultadoTransicion"]);
+		}else{
+			//javaalert($resultadoInicio->return->estatus.": ".$resultadoInicio->return->observacion);
 		}
+	}else{
+		javaalert($resultadoActividad->return->estatus.": ".$resultadoActividad->return->observacion);
 	}
-}
-
 
 if(isset($_POST["procesar"])){
 					
@@ -54,13 +59,18 @@ if(isset($_POST["procesar"])){
 		$client = new SOAPClient($wsdl_url);
 		$client->decode_utf8 = false;
 		$resultadoFinActividad = $client->FinalizarActividad($parametros);
-		echo '<br><pre>';print_r($resultadoFinActividad);
+		//echo '<br><pre>';print_r($resultadoFinActividad);
 						
 		if($resultadoFinActividad->return->estatus == "OK"){
-			iraUrl("index.php");
+			$_SESSION["resultadoFinActividad3"]=$resultadoFinActividad;
+			iraUrl("terminoProceso.php");
+		}else{
+			javaalert($resultadoFinActividad->return->estatus.": ".$resultadoFinActividad->return->observacion);
 		}
 	}
 }
+}
+
 /*} catch (Exception $e) {
 	javaalert('Lo sentimos no hay conexión');
 	iraURL('../views/index.php');

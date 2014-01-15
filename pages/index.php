@@ -60,11 +60,11 @@ if (isset($_POST["Biniciar"])){
 						$parametros = array('actividadActual' => $actividad,
 						           'usuarioActual' => $usuario);
 						$resultadoAsignar = $client->AsignarActividad($parametros);
-						echo '<br><pre>';print_r($resultadoAsignar);								
+						//echo '<br><pre>';print_r($resultadoAsignar);								
 						$parametros = array('actividadActual' => $actividad,
 									'sesionActual' => $sesionActual);								
 						$resultadoInicio = $client->IniciarActividad($parametros);
-						echo '<br><pre>';print_r($resultadoInicio);
+						//echo '<br><pre>';print_r($resultadoInicio);
 						
 						if($resultadoInicio->return->estatus == "OK"){
 							$condicion = array('id' => '1','borrado'=>'0');	
@@ -72,7 +72,7 @@ if (isset($_POST["Biniciar"])){
 										'sesionActual' => $sesionActual,
 									   	'condicionActual' => $condicion);
 							$resultadoFinActividad = $client->FinalizarActividad($parametros);
-							echo '<br><pre>';print_r($resultadoFinActividad);
+							//echo '<br><pre>';print_r($resultadoFinActividad);
 							
 							if($resultadoFinActividad->return->estatus == "OK"){								
 								$_SESSION["resultadoLogueo"]=$resultadoLogueo;
