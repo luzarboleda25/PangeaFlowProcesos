@@ -75,8 +75,16 @@ if (isset($_POST["Biniciar"])){
 							echo '<br><pre>';print_r($resultadoFinActividad);
 							
 							if($resultadoFinActividad->return->estatus == "OK"){								
+								$_SESSION["resultadoLogueo"]=$resultadoLogueo;
+								$_SESSION["resultadoCreacion"]=$resultadoCreacion;
+								$_SESSION["resultadoInstancia"]=$resultadoInstancia;
+								$_SESSION["resultadoActividad"]=$resultadoActividad;
+								$_SESSION["resultadoInicio"]=$resultadoInicio;
+								$_SESSION["resultadoFinActividad"]=$resultadoFinActividad;
 								iraURL("../pages/principal.php");
-							}
+							}else{
+				             javaalert($resultadoFinActividad->return->estatus.": ".$resultadoFinActividad->return->observacion);
+		                    }
 						}else{
 				         javaalert($resultadoInicio->return->estatus.": ".$resultadoInicio->return->observacion);
 		                }
@@ -84,9 +92,9 @@ if (isset($_POST["Biniciar"])){
 					}else{
 				     javaalert($resultadoActividad->return->estatus.": ".$resultadoActividad->return->observacion);
 		            }
+				}else{
+					javaalert($resultadoInstancia->return->estatus.": ".$resultadoInstancia->return->observacion);
 				}
-				javaalert($resultadoInstancia->return->estatus.": ".$resultadoInstancia->return->observacion);
-
 			}else{
 				javaalert($resultadoCreacion->return->estatus.": ".$resultadoCreacion->return->observacion);
 		       }

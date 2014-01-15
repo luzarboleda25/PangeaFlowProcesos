@@ -66,6 +66,15 @@ if(isset($_POST["procesar"])){
 	}
 }
 include("../views/principal.php");
+
+echo '<br>Resultado del Logueo:<pre>';print_r($_SESSION["resultadoLogueo"]);
+echo '<br>Resultado del Resultado de la Creación de la instancia:<pre>';print_r($_SESSION["resultadoCreacion"]);
+echo '<br>Resultado de la Búsqueda de la instancia creada:<pre>';print_r($_SESSION["resultadoInstancia"]);
+echo '<br>Resultado de la Búsqueda de la actividad inicial:<pre>';print_r($_SESSION["resultadoActividad"]);
+echo '<br>Resultado de Iniciar Actividad :<pre>';print_r($_SESSION["resultadoInicio"]);
+echo '<br>Resultado de Finalizar Actividad:<pre>';print_r($_SESSION["resultadoFinActividad"]);
+
+
 /*} catch (Exception $e) {
 	javaalert('Lo sentimos no hay conexión');
 	iraURL('../views/index.php');
