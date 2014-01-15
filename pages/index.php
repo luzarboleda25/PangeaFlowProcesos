@@ -77,10 +77,21 @@ if (isset($_POST["Biniciar"])){
 							if($resultadoFinActividad->return->estatus == "OK"){								
 								iraURL("../pages/principal.php");
 							}
-						}	
-					}
+						}else{
+				         javaalert($resultadoInicio->return->estatus.": ".$resultadoInicio->return->observacion);
+		                }
+						
+					}else{
+				     javaalert($resultadoActividad->return->estatus.": ".$resultadoActividad->return->observacion);
+		            }
 				}
-			}
+				javaalert($resultadoInstancia->return->estatus.": ".$resultadoInstancia->return->observacion);
+
+			}else{
+				javaalert($resultadoCreacion->return->estatus.": ".$resultadoCreacion->return->observacion);
+		       }
+		}else{
+		javaalert($resultadoLogueo->return->estatus.": ".$resultadoLogueo->return->observacion);
 		}
 	}
 }	

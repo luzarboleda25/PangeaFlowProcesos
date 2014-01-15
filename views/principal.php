@@ -18,7 +18,7 @@
 	  <div class="container app-container">
      		<form class="form-signin" method="post">
         		<h3 class="form-signin-heading">Presione para procesar la información del cliente</h3>
-        		<button name="procesar" class="btn btn-large btn-info" type="submit" name="Procesar información del cliente">Iniciar Sesión</button>
+        		<button name="procesar" class="btn btn-large btn-info" type="submit" >Procesar información del cliente</button>
       		</form>
     	</div>
     </body>
