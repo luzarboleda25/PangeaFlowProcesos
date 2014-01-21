@@ -26,7 +26,7 @@ if (isset($_POST["Biniciar"])){
 			$tareaInicial = array('id' => '1','borrado' => '0','tareaInicial' => '1','tareaInformativa' => '0','codigo' => '0','costo' => 12.22,'duracion' => '0','version' => '0');	
 			$sesionActual = array('id' => $resultadoLogueo->return->sesions->id,'borrado' => '0');	
 			$_SESSION["sesionUsuario"] = $sesionActual;
-			$instancia = array('IdUsuario' => $usuario,'borrado' => '0');
+			$instancia = array('IdUsuario' => $usuario,'borrado' => '0','descripcion'=>'verificar logueo','referencia'=>'referencia','estado'=>'estado');
 			$parametros = array('instanciaActual' => $instancia,
 						'sesionActual' => $sesionActual,
 						'periodoActual' => $periodo,

@@ -15,7 +15,7 @@ if(isset($_POST["procesar"])){
 		$grupo = array('id' => '2','borrado' => '0');		
 		$proceso = array('id' => '1','borrado' => '0','codigo' => '0','costo' => 12.22,'duracion' => '0','version' => '0');
 		$tareaInicial = array('id' => '2','borrado' => '0','tareaInicial' => '1','tareaInformativa' => '0','codigo' => '0','costo' => 12.22,'duracion' => '0','version' => '0');
-		$instancia = array('IdUsuario' => $usuarioActual,'borrado' => '0');
+		$instancia = array('IdUsuario' => $usuario,'borrado' => '0','descripcion'=>'Procesar facturación','referencia'=>'referencia','estado'=>'estado');
 		$parametros = array('instanciaActual' => $instancia,
 					'sesionActual' => $sesionActual,
 					'periodoActual' => $periodo,
